@@ -19,9 +19,7 @@ export default function Home() {
     setIsFetching(true);
     setErrorMessage("");
 
-    const url = (e.target as HTMLFormElement)?.querySelector(
-      "#username"
-    )?.value;
+    const url = (e.currentTarget.querySelector("#username") as HTMLInputElement)?.value;
     let username = getUsernameFromUrl(url);
     if(url.includes("leetcode.com") == false){
       username = url;
@@ -64,7 +62,7 @@ export default function Home() {
       newWorth += Number(rating) * 25;
 
       setWorth(Number(newWorth.toFixed(2)));
-    } catch (error) {
+    } catch (error: any) {
       setIsFetching(false);
       if (error.response && error.response.status === 404) {
         setErrorMessage("Cannot find user.");
@@ -112,7 +110,7 @@ export default function Home() {
               type="search"
               id="username"
               className="block font-bold w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
-              placeholder="Enter LeetCode url or username here..."
+              placeholder="Enter LeetCode profile url or username here..."
               required
             />
             <button
