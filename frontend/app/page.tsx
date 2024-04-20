@@ -8,15 +8,25 @@ export default function Home() {
   const [errorMessage, setErrorMessage] = useState("");
   const [worth, setWorth] = useState(0);
 
+  function getUsernameFromUrl(url: any) {
+    const regex = /https:\/\/leetcode\.com\/([\w-]+)\//;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsFetching(true);
     setErrorMessage("");
 
-    const username = (e.target as HTMLFormElement)?.querySelector(
+    const url = (e.target as HTMLFormElement)?.querySelector(
       "#username"
     )?.value;
-
+    let username = getUsernameFromUrl(url);
+    if(url.includes("leetcode.com") == false){
+      username = url;
+    }
+    console.log(username);
     try {
       let newWorth = 0;
 
@@ -67,8 +77,8 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen w-screen text-center bg-gradient-to-r from-slate-900 to-slate-700 text-white">
-      <div className="text-center">
+    <div className="flex flex-col justify-center items-center h-screen w-screen text-center bg-gradient-to-r from-slate-900 to-slate-700 text-white">
+      <div className="text-center m-auto">
         <h1 className="text-4xl font-semibold leading-tight md:leading-tight max-w-xs sm:max-w-none md:text-6xl md:max-w-3xl mb-2">
           Find your LeetCode Worth in one click 🚀
         </h1>
@@ -102,7 +112,7 @@ export default function Home() {
               type="search"
               id="username"
               className="block font-bold w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
-              placeholder="Enter your username..."
+              placeholder="Enter LeetCode url or username here..."
               required
             />
             <button
@@ -128,7 +138,7 @@ export default function Home() {
               {errorMessage}
             </div>
           )}
-          { errorMessage.length==0 && !isFetching && worth > 0 && (
+          {errorMessage.length == 0 && !isFetching && worth > 0 && (
             <div
               className="bg-white text-green-500 font-bold mt-2"
               style={{ padding: "10px", borderRadius: "10px" }}
@@ -137,6 +147,12 @@ export default function Home() {
             </div>
           )}
         </form>
+      </div>
+      <div className="mt-auto text-3xl mb-2">
+        Made by <a href='https://www.instagram.com/weblancerdev/'
+        style={{
+          color:'yellow'
+        }}><u>WebLancerDev</u></a>
       </div>
     </div>
   );
