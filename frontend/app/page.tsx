@@ -6,9 +6,9 @@ export default function Home() {
   useEffect(() => {
     console.log("Hello world");
     const fetchData = async () => {
-      const response1 = await axios.get("http://localhost:4000/user/tejartr445/solved");
-      const response2 = await axios.get("http://localhost:4000/user/tejartr445/badges");
-      const response3 = await axios.get("http://localhost:4000/user/tejartr445/contests");
+      const response1 = await axios.get("https://leetcode-worth-52co.onrender.com/user/tejartr445/solved");
+      const response2 = await axios.get("https://leetcode-worth-52co.onrender.com/user/tejartr445/badges");
+      const response3 = await axios.get("https://leetcode-worth-52co.onrender.com/user/tejartr445/contests");
       const data1 = await response1.data;
       console.log(data1.data.matchedUser.submitStatsGlobal.
         acSubmissionNum);
