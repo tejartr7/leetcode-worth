@@ -150,6 +150,7 @@ export default function Home() {
       </div>
       <div className="mt-auto text-3xl mb-2">
         Made by <a href='https://www.instagram.com/weblancerdev/'
+        target="_blank"
         style={{
           color:'yellow'
         }}><u>WebLancerDev</u></a>
