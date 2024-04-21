@@ -140,7 +140,7 @@ export default function Home() {
           )}
         </form>
       </div>
-      <div className="mt-auto text-3xl mb-2">
+      <div className="mt-auto text-3xl mb-2 font-bold">
         Made by{" "}
         <a
           href="https://www.instagram.com/weblancerdev/"
