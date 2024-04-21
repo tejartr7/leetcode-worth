@@ -1,33 +1,38 @@
 export const userProfileQuery = `
     query userPublicProfile($username: String!) {
         matchedUser(username: $username) {
-            username
-            githubUrl
-            twitterUrl
-            linkedinUrl
-            profile {
-                ranking
-                userAvatar
-                realName
-                aboutMe
-                school
-                websites
-                countryName
-                company
-                jobTitle
-                skillTags
-                postViewCount
-                postViewCountDiff
-                reputation
-                reputationDiff
-                solutionCount
-                solutionCountDiff
-                categoryDiscussCount
-                categoryDiscussCountDiff
+            submitStatsGlobal {
+                acSubmissionNum {
+                    difficulty
+                    count
+                }
             }
-            languageProblemCount {
-            languageName
-            problemsSolved
+            badges {
+                id
+                name
+                shortName
+                displayName
+                icon
+                hoverText
+                medal {
+                    slug
+                    config {
+                        iconGif
+                        iconGifBackground
+                    }
+                }
+                creationDate
+                category
+            }
+        }
+        userContestRanking(username: $username) {
+            attendedContestsCount
+            rating
+            globalRanking
+            totalParticipants
+            topPercentage
+            badge {
+                name
             }
         }
     }

@@ -19,20 +19,22 @@ export default function Home() {
     setIsFetching(true);
     setErrorMessage("");
 
-    const url = (e.currentTarget.querySelector("#username") as HTMLInputElement)?.value;
+    const url = (e.currentTarget.querySelector("#username") as HTMLInputElement)
+      ?.value;
     let username = getUsernameFromUrl(url);
-    if(url.includes("leetcode.com") == false){
+    if (url.includes("leetcode.com") == false) {
       username = url;
     }
     console.log(username);
     try {
       let newWorth = 0;
 
-      const response1 = await axios.get(
-        `https://leetcode-worth-52co.onrender.com/user/${username}/solved`
+      const response = await axios.get(
+        `http://localhost:4000/user/${username}`
       );
-      const data1 = response1.data;
-      const solved = data1.data.matchedUser.submitStatsGlobal.acSubmissionNum;
+      console.log(response);
+      const data = response.data;
+      const solved = data.data.matchedUser.submitStatsGlobal.acSubmissionNum;
 
       for (let i = 1; i < 4; i++) {
         const curr = solved[i].count;
@@ -44,17 +46,9 @@ export default function Home() {
           newWorth += Number(curr) * 20;
         }
       }
-
-      const response2 = await axios.get(
-        `https://leetcode-worth-52co.onrender.com/user/${username}/badges`
-      );
-      const data2 = response2.data;
+      const data2 = response.data;
       newWorth += Number(data2.data.matchedUser.badges.length) * 100;
-
-      const response3 = await axios.get(
-        `https://leetcode-worth-52co.onrender.com/user/${username}/contests`
-      );
-      const data3 = response3.data;
+      const data3 = response.data;
       let rating = Number(data3.data.userContestRanking.rating) - 1500;
       if (rating < 0) {
         rating = 0;
@@ -110,7 +104,7 @@ export default function Home() {
               type="search"
               id="username"
               className="block font-bold w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
-              placeholder="Enter LeetCode profile url or username here..."
+              placeholder="Profile url or Username.."
               required
             />
             <button
@@ -147,11 +141,16 @@ export default function Home() {
         </form>
       </div>
       <div className="mt-auto text-3xl mb-2">
-        Made by <a href='https://www.instagram.com/weblancerdev/'
-        target="_blank"
-        style={{
-          color:'yellow'
-        }}><u>WebLancerDev</u></a>
+        Made by{" "}
+        <a
+          href="https://www.instagram.com/weblancerdev/"
+          target="_blank"
+          style={{
+            color: "yellow",
+          }}
+        >
+          <u>WebLancerDev</u>
+        </a>
       </div>
     </div>
   );
