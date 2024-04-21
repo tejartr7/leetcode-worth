@@ -30,7 +30,7 @@ export default function Home() {
       let newWorth = 0;
 
       const response = await axios.get(
-        `http://localhost:4000/user/${username}`
+        `https://leetcode-worth-52co.onrender.com/user/${username}`
       );
       console.log(response);
       const data = response.data;
